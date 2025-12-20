@@ -1,8 +1,15 @@
 <script lang="ts">
 import { Wallet, Car, Utensils, Home, MoreHorizontal } from "lucide-svelte";
-import { fade } from "svelte/transition";
 
-let { estimatedCosts } = $props();
+interface EstimatedCosts {
+	accommodation: number;
+	food: number;
+	transport: number;
+	misc: number;
+	[key: string]: number; // Pre prípadné ďalšie kategórie
+}
+
+let { estimatedCosts }: { estimatedCosts: EstimatedCosts } = $props();
 
 const categories = [
 	{
@@ -28,13 +35,13 @@ const categories = [
 
 let total = $derived(
 	Object.values(estimatedCosts).reduce(
-		(acc: number, val: any) => acc + (typeof val === "number" ? val : 0),
+		(acc: number, val: number) => acc + val,
 		0,
 	),
 );
 </script>
 
-<div in:fade class="glass p-8 rounded-3xl border-primary/20">
+<div class="glass p-8 rounded-3xl border-primary/20">
     <div class="flex items-center gap-3 mb-8">
         <div class="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center">
             <Wallet class="text-primary w-6 h-6" />
@@ -67,4 +74,3 @@ let total = $derived(
         <span class="text-3xl font-black text-primary-light font-display">${total}</span>
     </div>
 </div>
-

@@ -13,7 +13,17 @@ import tokyoImg from "$lib/assets/images/tokyo.png";
 import amalfiImg from "$lib/assets/images/amalfi.png";
 import santoriniImg from "$lib/assets/images/santorini.png";
 
-const destinations = [
+interface Destination {
+	id: string;
+	name: string;
+	description: string;
+	image: string;
+	style: string;
+	duration: number;
+	tags: string[];
+}
+
+const destinations: Destination[] = [
 	{
 		id: "tokyo",
 		name: "Tokyo, Japan",
@@ -152,7 +162,7 @@ let paginatedResults = $derived(
 	),
 );
 
-function handleExplore(dest: any) {
+function handleExplore(dest: Destination) {
 	goto(
 		`/?dest=${encodeURIComponent(dest.name)}&duration=${dest.duration}&style=${dest.style}#hero-section`,
 	);

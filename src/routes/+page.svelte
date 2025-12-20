@@ -9,11 +9,45 @@ import { fade, fly } from "svelte/transition";
 import { onMount } from "svelte";
 import { page } from "$app/state";
 
+interface Itinerary {
+	id: string;
+	destination: string;
+	duration: number;
+	style: string;
+	days: Array<{
+		day: number;
+		activities: Array<{
+			time: string;
+			title: string;
+			description: string;
+			category: string;
+		}>;
+	}>;
+	estimatedCosts: {
+		accommodation: number;
+		food: number;
+		transport: number;
+		misc: number;
+	};
+	summary?: string;
+	[key: string]: unknown;
+}
+
+interface FormData {
+	destination: string;
+	duration: number;
+	style: string;
+}
+
+interface ApiError {
+	error: string;
+}
+
 let destination = $state("");
 let isGenerating = $state(false);
-let itinerary = $state<any>(null);
+let itinerary = $state<Itinerary | null>(null);
 let error = $state("");
-let currentFormData = $state<any>(null);
+let currentFormData = $state<FormData | null>(null);
 
 onMount(() => {
 	const destParam = page.url.searchParams.get("dest");
@@ -21,17 +55,11 @@ onMount(() => {
 	const styleParam = page.url.searchParams.get("style");
 
 	if (destParam || durationParam || styleParam) {
-		// Pre-fill the form if needed (the form handles its own state, but we could pass it down if we wanted)
-		// For now, let's just make sure the handlePlanTrip can be triggered or the form is ready.
-		// Actually, the PlanForm holds its own $state, so we should probably pass props to it.
+		// Pre-fill the form if needed
 	}
 });
 
-async function handlePlanTrip(formData: {
-	destination: string;
-	duration: number;
-	style: string;
-}) {
+async function handlePlanTrip(formData: FormData) {
 	destination = formData.destination;
 	currentFormData = formData;
 	if (!destination) {
@@ -50,12 +78,15 @@ async function handlePlanTrip(formData: {
 			body: JSON.stringify(formData),
 		});
 
-		const data = await response.json();
-		if (data.error) throw new Error(data.error);
+		const data: Itinerary | ApiError = await response.json();
+		
+		if ('error' in data) {
+			throw new Error((data as ApiError).error);
+		}
 
-		itinerary = data;
-	} catch (e: any) {
-		error = e.message || "Something went wrong";
+		itinerary = data as Itinerary;
+	} catch (e) {
+		error = e instanceof Error ? e.message : "Something went wrong";
 	} finally {
 		isGenerating = false;
 	}
