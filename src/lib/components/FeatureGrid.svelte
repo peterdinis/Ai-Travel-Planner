@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Plane, Sparkles, Calendar } from 'lucide-svelte';
+import { Plane, Sparkles, Calendar } from "lucide-svelte";
 </script>
 
 <section class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-20">

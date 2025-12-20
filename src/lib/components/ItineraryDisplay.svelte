@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { ArrowLeft, Share2, Printer } from "lucide-svelte";
-	import { fade, fly } from "svelte/transition";
-	import DaySection from "./itinerary/DaySection.svelte";
-	import CostEstimator from "./itinerary/CostEstimator.svelte";
-	import PackingList from "./itinerary/PackingList.svelte";
-	import WeatherTips from "./itinerary/WeatherTips.svelte";
+import { ArrowLeft, Share2, Printer } from "lucide-svelte";
+import { fade, fly } from "svelte/transition";
+import DaySection from "./itinerary/DaySection.svelte";
+import CostEstimator from "./itinerary/CostEstimator.svelte";
+import PackingList from "./itinerary/PackingList.svelte";
+import WeatherTips from "./itinerary/WeatherTips.svelte";
 
-	let { itinerary, onBack } = $props();
+let { itinerary, onBack } = $props();
 </script>
 
 <div in:fade class="max-w-6xl mx-auto py-8 px-4">

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { UtensilsCrossed, Coffee } from 'lucide-svelte';
-	import ActivityCard from './ActivityCard.svelte';
-	import { fly } from 'svelte/transition';
+import { UtensilsCrossed, Coffee } from "lucide-svelte";
+import ActivityCard from "./ActivityCard.svelte";
+import { fly } from "svelte/transition";
 
-	let { day, index } = $props();
+let { day, index } = $props();
 </script>
 
 <div in:fly={{ y: 20, delay: index * 100 }} class="relative pl-8 border-l border-white/10 pb-12 last:pb-0">

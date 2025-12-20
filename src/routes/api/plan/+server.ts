@@ -1,19 +1,19 @@
-import { json } from '@sveltejs/kit';
-import OpenAI from 'openai';
-import { env } from '$env/dynamic/private';
+import { json } from "@sveltejs/kit";
+import OpenAI from "openai";
+import { env } from "$env/dynamic/private";
 
 const openai = new OpenAI({
-    apiKey: env.OPENAI_API_KEY
+	apiKey: env.OPENAI_API_KEY,
 });
 
 export async function POST({ request }: { request: Request }) {
-    const { destination, duration, style } = await request.json();
+	const { destination, duration, style } = await request.json();
 
-    if (!destination || !duration) {
-        return json({ error: 'Missing destination or duration' }, { status: 400 });
-    }
+	if (!destination || !duration) {
+		return json({ error: "Missing destination or duration" }, { status: 400 });
+	}
 
-    const prompt = `
+	const prompt = `
 You are a professional travel planner specializing in creating personalized itineraries.
 
 Create a detailed ${duration}-day travel itinerary for ${destination} with a ${style} style.
@@ -105,78 +105,87 @@ JSON STRUCTURE TO FOLLOW:
 NOW CREATE THE ITINERARY FOR: ${destination} (${duration} days, ${style} style)
 `;
 
-    try {
-        if (!env.OPENAI_API_KEY) {
-            throw new Error('OpenAI API key not found');
-        }
+	try {
+		if (!env.OPENAI_API_KEY) {
+			throw new Error("OpenAI API key not found");
+		}
 
-        const response = await openai.chat.completions.create({
-            model: "gpt-4o-mini",
-            messages: [
-                { 
-                    role: "system", 
-                    content: `You are a travel planning expert. You respond ONLY with valid JSON. 
+		const response = await openai.chat.completions.create({
+			model: "gpt-4o-mini",
+			messages: [
+				{
+					role: "system",
+					content: `You are a travel planning expert. You respond ONLY with valid JSON. 
                     Never add explanations, notes, or text outside the JSON structure. 
-                    Ensure all field names match exactly and values are properly formatted.`
-                },
-                { role: "user", content: prompt }
-            ],
-            response_format: { type: "json_object" },
-            temperature: 0.7,
-            max_tokens: 3000
-        });
+                    Ensure all field names match exactly and values are properly formatted.`,
+				},
+				{ role: "user", content: prompt },
+			],
+			response_format: { type: "json_object" },
+			temperature: 0.7,
+			max_tokens: 3000,
+		});
 
-        const text = response.choices[0].message.content;
+		const text = response.choices[0].message.content;
 
-        if (!text) {
-            throw new Error('Failed to generate itinerary');
-        }
+		if (!text) {
+			throw new Error("Failed to generate itinerary");
+		}
 
-        // Parse and validate the response
-        const itinerary = JSON.parse(text);
-        
-        // Additional validation
-        if (!itinerary.days || itinerary.days.length !== parseInt(duration)) {
-            throw new Error(`Expected ${duration} days but got ${itinerary.days?.length || 0}`);
-        }
-        
-        // Ensure cost fields are numbers
-        if (itinerary.estimatedCosts) {
-            Object.keys(itinerary.estimatedCosts).forEach(key => {
-                if (typeof itinerary.estimatedCosts[key] === 'string') {
-                    itinerary.estimatedCosts[key] = parseFloat(itinerary.estimatedCosts[key]) || 0;
-                }
-            });
-        }
+		// Parse and validate the response
+		const itinerary = JSON.parse(text);
 
-        return json(itinerary);
-    } catch (error) {
-        // Type-safe error handling
-        console.error('Error generating itinerary:', error);
-        
-        // Define error properties safely
-        let errorMessage = 'Failed to generate itinerary.';
-        let errorDetails = '';
-        
-        if (error instanceof Error) {
-            errorMessage = error.message;
-            if (error instanceof SyntaxError) {
-                errorMessage = 'Invalid response format from AI service.';
-            }
-        } else if (typeof error === 'string') {
-            errorMessage = error;
-        } else if (error && typeof error === 'object' && 'message' in error) {
-            errorMessage = String(error.message);
-        }
-        
-        // Check for API key errors
-        if (errorMessage.includes('API key') || errorMessage.includes('authentication')) {
-            errorMessage = 'Service configuration error. Please check API key.';
-        }
-        
-        return json({ 
-            error: errorMessage,
-            suggestion: 'Try adjusting your trip parameters or try again later.'
-        }, { status: 500 });
-    }
+		// Additional validation
+		if (!itinerary.days || itinerary.days.length !== parseInt(duration)) {
+			throw new Error(
+				`Expected ${duration} days but got ${itinerary.days?.length || 0}`,
+			);
+		}
+
+		// Ensure cost fields are numbers
+		if (itinerary.estimatedCosts) {
+			Object.keys(itinerary.estimatedCosts).forEach((key) => {
+				if (typeof itinerary.estimatedCosts[key] === "string") {
+					itinerary.estimatedCosts[key] =
+						parseFloat(itinerary.estimatedCosts[key]) || 0;
+				}
+			});
+		}
+
+		return json(itinerary);
+	} catch (error) {
+		// Type-safe error handling
+		console.error("Error generating itinerary:", error);
+
+		// Define error properties safely
+		let errorMessage = "Failed to generate itinerary.";
+		let errorDetails = "";
+
+		if (error instanceof Error) {
+			errorMessage = error.message;
+			if (error instanceof SyntaxError) {
+				errorMessage = "Invalid response format from AI service.";
+			}
+		} else if (typeof error === "string") {
+			errorMessage = error;
+		} else if (error && typeof error === "object" && "message" in error) {
+			errorMessage = String(error.message);
+		}
+
+		// Check for API key errors
+		if (
+			errorMessage.includes("API key") ||
+			errorMessage.includes("authentication")
+		) {
+			errorMessage = "Service configuration error. Please check API key.";
+		}
+
+		return json(
+			{
+				error: errorMessage,
+				suggestion: "Try adjusting your trip parameters or try again later.",
+			},
+			{ status: 500 },
+		);
+	}
 }

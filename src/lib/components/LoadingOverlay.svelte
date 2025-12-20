@@ -1,45 +1,37 @@
 <script lang="ts">
-	import {
-		Loader2,
-		Sparkles,
-		Plane,
-		Globe,
-		Camera,
-		Map,
-	} from "lucide-svelte";
-	import { fade, fly } from "svelte/transition";
+import { Loader2, Sparkles, Plane, Globe, Camera, Map } from "lucide-svelte";
+import { fade, fly } from "svelte/transition";
 
-	let { destination } = $props();
+let { destination } = $props();
 
-	const messages = [
-		"Searching for local gems...",
-		"Optimizing travel routes...",
-		"Finding the best photo spots...",
-		"Checking weather conditions...",
-		"Talking to local experts...",
-		"Mapping out your adventure...",
-	];
+const messages = [
+	"Searching for local gems...",
+	"Optimizing travel routes...",
+	"Finding the best photo spots...",
+	"Checking weather conditions...",
+	"Talking to local experts...",
+	"Mapping out your adventure...",
+];
 
-	let currentMessage = $state(messages[0]);
-	let progress = $state(0);
+let currentMessage = $state(messages[0]);
+let progress = $state(0);
 
-	$effect(() => {
-		const interval = setInterval(() => {
-			currentMessage =
-				messages[Math.floor(Math.random() * messages.length)];
-		}, 1500);
+$effect(() => {
+	const interval = setInterval(() => {
+		currentMessage = messages[Math.floor(Math.random() * messages.length)];
+	}, 1500);
 
-		const progressInterval = setInterval(() => {
-			if (progress < 95) progress += Math.random() * 10;
-		}, 200);
+	const progressInterval = setInterval(() => {
+		if (progress < 95) progress += Math.random() * 10;
+	}, 200);
 
-		return () => {
-			clearInterval(interval);
-			clearInterval(progressInterval);
-		};
-	});
+	return () => {
+		clearInterval(interval);
+		clearInterval(progressInterval);
+	};
+});
 
-	const icons = [Plane, Globe, Camera, Map];
+const icons = [Plane, Globe, Camera, Map];
 </script>
 
 <div

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { CloudSun, Wind, Thermometer, ShieldAlert } from 'lucide-svelte';
-	import { fade } from 'svelte/transition';
+import { CloudSun, Wind, Thermometer, ShieldAlert } from "lucide-svelte";
+import { fade } from "svelte/transition";
 
-	let { weather } = $props();
+let { weather } = $props();
 </script>
 
 <div in:fade class="glass p-8 rounded-3xl border-accent/20 h-full">

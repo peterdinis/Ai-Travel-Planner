@@ -1,184 +1,175 @@
 <script lang="ts">
-	import { fade, fly } from "svelte/transition";
-	import {
-		Compass,
-		Clock,
-		MapPin,
-		Search,
-		ChevronLeft,
-		ChevronRight,
-	} from "lucide-svelte";
-	import { goto } from "$app/navigation";
-	import tokyoImg from "$lib/assets/images/tokyo.png";
-	import amalfiImg from "$lib/assets/images/amalfi.png";
-	import santoriniImg from "$lib/assets/images/santorini.png";
+import { fade, fly } from "svelte/transition";
+import {
+	Compass,
+	Clock,
+	MapPin,
+	Search,
+	ChevronLeft,
+	ChevronRight,
+} from "lucide-svelte";
+import { goto } from "$app/navigation";
+import tokyoImg from "$lib/assets/images/tokyo.png";
+import amalfiImg from "$lib/assets/images/amalfi.png";
+import santoriniImg from "$lib/assets/images/santorini.png";
 
-	const destinations = [
-		{
-			id: "tokyo",
-			name: "Tokyo, Japan",
-			description:
-				"A neon-lit metropolis where tradition meets future tech.",
-			image: tokyoImg,
-			style: "modern",
-			duration: 7,
-			tags: ["Cyberpunk", "Gourmet", "Culture"],
-		},
-		{
-			id: "amalfi",
-			name: "Amalfi Coast, Italy",
-			description:
-				"Dramatic cliffs, turquoise waters, and sun-drenched lemon groves.",
-			image: amalfiImg,
-			style: "relaxed",
-			duration: 5,
-			tags: ["Romantic", "Scenic", "Beach"],
-		},
-		{
-			id: "santorini",
-			name: "Santorini, Greece",
-			description:
-				"Iconic white-washed buildings and unforgettable caldera sunsets.",
-			image: santoriniImg,
-			style: "luxury",
-			duration: 4,
-			tags: ["Luxury", "Historic", "Views"],
-		},
-		{
-			id: "paris",
-			name: "Paris, France",
-			description:
-				"The city of light, world-class art, and romantic boulevards.",
-			image: santoriniImg, // Placeholder
-			style: "cultural",
-			duration: 4,
-			tags: ["Art", "Romance", "Gastronomy"],
-		},
-		{
-			id: "bali",
-			name: "Bali, Indonesia",
-			description:
-				"Tropical paradise with lush jungles and tranquil beaches.",
-			image: amalfiImg, // Placeholder
-			style: "relaxing",
-			duration: 10,
-			tags: ["Tropical", "Wellness", "Nature"],
-		},
-		{
-			id: "reykjavik",
-			name: "Reykjavik, Iceland",
-			description:
-				"Lava fields, hot springs, and the magical Northern Lights.",
-			image: tokyoImg, // Placeholder
-			style: "adventure",
-			duration: 6,
-			tags: ["Nature", "Adventure", "Landscape"],
-		},
-		{
-			id: "kyoto",
-			name: "Kyoto, Japan",
-			description:
-				"Ancient temples, traditional tea houses, and serene gardens.",
-			image: tokyoImg, // Placeholder
-			style: "cultural",
-			duration: 5,
-			tags: ["Traditional", "Spiritual", "Zen"],
-		},
-		{
-			id: "barcelona",
-			name: "Barcelona, Spain",
-			description:
-				"Stunning architecture, vibrant street life, and golden beaches.",
-			image: amalfiImg, // Placeholder
-			style: "modern",
-			duration: 5,
-			tags: ["Architecture", "Urban", "Mediterranean"],
-		},
-		{
-			id: "new-york",
-			name: "New York City, USA",
-			description:
-				"The empire state: iconic skyline, Broadway, and endless energy.",
-			image: tokyoImg, // Placeholder
-			style: "modern",
-			duration: 5,
-			tags: ["City", "Shopping", "Culture"],
-		},
-		{
-			id: "cairo",
-			name: "Cairo, Egypt",
-			description:
-				"Gateway to the pyramids and thousands of years of human history.",
-			image: santoriniImg, // Placeholder
-			style: "cultural",
-			duration: 6,
-			tags: ["Ancient", "Desert", "Adventure"],
-		},
-		{
-			id: "zermatt",
-			name: "Zermatt, Switzerland",
-			description:
-				"Alpine wonderland at the foot of the iconic Matterhorn.",
-			image: amalfiImg, // Placeholder
-			style: "adventure",
-			duration: 4,
-			tags: ["Skiing", "Mountain", "Luxury"],
-		},
-		{
-			id: "machu-picchu",
-			name: "Machu Picchu, Peru",
-			description:
-				"Mystical Incan citadel hidden high in the Andes mountains.",
-			image: tokyoImg, // Placeholder
-			style: "adventure",
-			duration: 3,
-			tags: ["History", "Hiking", "Inca"],
-		},
-	];
+const destinations = [
+	{
+		id: "tokyo",
+		name: "Tokyo, Japan",
+		description: "A neon-lit metropolis where tradition meets future tech.",
+		image: tokyoImg,
+		style: "modern",
+		duration: 7,
+		tags: ["Cyberpunk", "Gourmet", "Culture"],
+	},
+	{
+		id: "amalfi",
+		name: "Amalfi Coast, Italy",
+		description:
+			"Dramatic cliffs, turquoise waters, and sun-drenched lemon groves.",
+		image: amalfiImg,
+		style: "relaxed",
+		duration: 5,
+		tags: ["Romantic", "Scenic", "Beach"],
+	},
+	{
+		id: "santorini",
+		name: "Santorini, Greece",
+		description:
+			"Iconic white-washed buildings and unforgettable caldera sunsets.",
+		image: santoriniImg,
+		style: "luxury",
+		duration: 4,
+		tags: ["Luxury", "Historic", "Views"],
+	},
+	{
+		id: "paris",
+		name: "Paris, France",
+		description: "The city of light, world-class art, and romantic boulevards.",
+		image: santoriniImg, // Placeholder
+		style: "cultural",
+		duration: 4,
+		tags: ["Art", "Romance", "Gastronomy"],
+	},
+	{
+		id: "bali",
+		name: "Bali, Indonesia",
+		description: "Tropical paradise with lush jungles and tranquil beaches.",
+		image: amalfiImg, // Placeholder
+		style: "relaxing",
+		duration: 10,
+		tags: ["Tropical", "Wellness", "Nature"],
+	},
+	{
+		id: "reykjavik",
+		name: "Reykjavik, Iceland",
+		description: "Lava fields, hot springs, and the magical Northern Lights.",
+		image: tokyoImg, // Placeholder
+		style: "adventure",
+		duration: 6,
+		tags: ["Nature", "Adventure", "Landscape"],
+	},
+	{
+		id: "kyoto",
+		name: "Kyoto, Japan",
+		description: "Ancient temples, traditional tea houses, and serene gardens.",
+		image: tokyoImg, // Placeholder
+		style: "cultural",
+		duration: 5,
+		tags: ["Traditional", "Spiritual", "Zen"],
+	},
+	{
+		id: "barcelona",
+		name: "Barcelona, Spain",
+		description:
+			"Stunning architecture, vibrant street life, and golden beaches.",
+		image: amalfiImg, // Placeholder
+		style: "modern",
+		duration: 5,
+		tags: ["Architecture", "Urban", "Mediterranean"],
+	},
+	{
+		id: "new-york",
+		name: "New York City, USA",
+		description:
+			"The empire state: iconic skyline, Broadway, and endless energy.",
+		image: tokyoImg, // Placeholder
+		style: "modern",
+		duration: 5,
+		tags: ["City", "Shopping", "Culture"],
+	},
+	{
+		id: "cairo",
+		name: "Cairo, Egypt",
+		description:
+			"Gateway to the pyramids and thousands of years of human history.",
+		image: santoriniImg, // Placeholder
+		style: "cultural",
+		duration: 6,
+		tags: ["Ancient", "Desert", "Adventure"],
+	},
+	{
+		id: "zermatt",
+		name: "Zermatt, Switzerland",
+		description: "Alpine wonderland at the foot of the iconic Matterhorn.",
+		image: amalfiImg, // Placeholder
+		style: "adventure",
+		duration: 4,
+		tags: ["Skiing", "Mountain", "Luxury"],
+	},
+	{
+		id: "machu-picchu",
+		name: "Machu Picchu, Peru",
+		description: "Mystical Incan citadel hidden high in the Andes mountains.",
+		image: tokyoImg, // Placeholder
+		style: "adventure",
+		duration: 3,
+		tags: ["History", "Hiking", "Inca"],
+	},
+];
 
-	let searchQuery = $state("");
-	let currentPage = $state(1);
-	const itemsPerPage = 6;
+let searchQuery = $state("");
+let currentPage = $state(1);
+const itemsPerPage = 6;
 
-	let filteredResults = $derived(
-		destinations.filter(
-			(dest) =>
-				dest.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-				dest.description
-					.toLowerCase()
-					.includes(searchQuery.toLowerCase()) ||
-				dest.tags.some((tag) =>
-					tag.toLowerCase().includes(searchQuery.toLowerCase()),
-				),
-		),
+let filteredResults = $derived(
+	destinations.filter(
+		(dest) =>
+			dest.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+			dest.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+			dest.tags.some((tag) =>
+				tag.toLowerCase().includes(searchQuery.toLowerCase()),
+			),
+	),
+);
+
+let totalPages = $derived(Math.ceil(filteredResults.length / itemsPerPage));
+let paginatedResults = $derived(
+	filteredResults.slice(
+		(currentPage - 1) * itemsPerPage,
+		currentPage * itemsPerPage,
+	),
+);
+
+function handleExplore(dest: any) {
+	goto(
+		`/?dest=${encodeURIComponent(dest.name)}&duration=${dest.duration}&style=${dest.style}#hero-section`,
 	);
+}
 
-	let totalPages = $derived(Math.ceil(filteredResults.length / itemsPerPage));
-	let paginatedResults = $derived(
-		filteredResults.slice(
-			(currentPage - 1) * itemsPerPage,
-			currentPage * itemsPerPage,
-		),
-	);
+function nextPage() {
+	if (currentPage < totalPages) currentPage++;
+}
 
-	function handleExplore(dest: any) {
-		goto(
-			`/?dest=${encodeURIComponent(dest.name)}&duration=${dest.duration}&style=${dest.style}#hero-section`,
-		);
-	}
+function prevPage() {
+	if (currentPage > 1) currentPage--;
+}
 
-	function nextPage() {
-		if (currentPage < totalPages) currentPage++;
-	}
-
-	function prevPage() {
-		if (currentPage > 1) currentPage--;
-	}
-
-	$effect(() => {
-		// Reset to page 1 when searching
-		if (searchQuery) currentPage = 1;
-	});
+$effect(() => {
+	// Reset to page 1 when searching
+	if (searchQuery) currentPage = 1;
+});
 </script>
 
 <div class="space-y-12">

@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { CheckSquare, Square, PackageCheck } from 'lucide-svelte';
-	import { fade, slide } from 'svelte/transition';
+import { CheckSquare, Square, PackageCheck } from "lucide-svelte";
+import { fade, slide } from "svelte/transition";
 
-	let { packingList } = $props();
-	let checkedItems = $state(new Set());
+let { packingList } = $props();
+let checkedItems = $state(new Set());
 
-	function toggle(item: string) {
-		if (checkedItems.has(item)) {
-			checkedItems.delete(item);
-		} else {
-			checkedItems.add(item);
-		}
-		checkedItems = new Set(checkedItems);
+function toggle(item: string) {
+	if (checkedItems.has(item)) {
+		checkedItems.delete(item);
+	} else {
+		checkedItems.add(item);
 	}
+	checkedItems = new Set(checkedItems);
+}
 </script>
 
 <div in:fade class="glass p-8 rounded-3xl border-secondary/20">

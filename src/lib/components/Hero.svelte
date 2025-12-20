@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { Sparkles } from "lucide-svelte";
-    import { fly } from "svelte/transition";
+import { Sparkles } from "lucide-svelte";
+import { fly } from "svelte/transition";
 
-    let { children } = $props();
+let { children } = $props();
 </script>
 
 <div class="max-w-4xl mx-auto text-center relative z-10">

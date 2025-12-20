@@ -1,53 +1,53 @@
 <script lang="ts">
-    import {
-        MapPin,
-        Calendar,
-        Globe,
-        Zap,
-        Shield,
-        Sparkles,
-        ArrowRight,
-        Users,
-        Heart,
-        Wallet,
-        Trees,
-        Laptop,
-    } from "lucide-svelte";
-    import { fly } from "svelte/transition";
+import {
+	MapPin,
+	Calendar,
+	Globe,
+	Zap,
+	Shield,
+	Sparkles,
+	ArrowRight,
+	Users,
+	Heart,
+	Wallet,
+	Trees,
+	Laptop,
+} from "lucide-svelte";
+import { fly } from "svelte/transition";
 
-    let {
-        onPlan,
-        isBusy,
-        initialDestination = "",
-        initialDuration = 7,
-        initialStyle = "relaxing",
-    } = $props();
+let {
+	onPlan,
+	isBusy,
+	initialDestination = "",
+	initialDuration = 7,
+	initialStyle = "relaxing",
+} = $props();
 
-    let destination = $state(initialDestination);
-    let duration = $state(initialDuration);
-    let selectedStyle = $state(initialStyle);
+let destination = $state(initialDestination);
+let duration = $state(initialDuration);
+let selectedStyle = $state(initialStyle);
 
-    $effect(() => {
-        if (initialDestination) destination = initialDestination;
-        if (initialDuration) duration = initialDuration;
-        if (initialStyle) selectedStyle = initialStyle;
-    });
+$effect(() => {
+	if (initialDestination) destination = initialDestination;
+	if (initialDuration) duration = initialDuration;
+	if (initialStyle) selectedStyle = initialStyle;
+});
 
-    const tripStyles = [
-        { id: "relaxing", label: "Relaxing", icon: Globe },
-        { id: "adventure", label: "Adventure", icon: Zap },
-        { id: "cultural", label: "Cultural", icon: Shield },
-        { id: "luxury", label: "Luxury", icon: Sparkles },
-        { id: "family", label: "Family", icon: Users },
-        { id: "romantic", label: "Romantic", icon: Heart },
-        { id: "budget", label: "Budget", icon: Wallet },
-        { id: "nature", label: "Nature", icon: Trees },
-        { id: "nomad", label: "Nomad", icon: Laptop },
-    ];
+const tripStyles = [
+	{ id: "relaxing", label: "Relaxing", icon: Globe },
+	{ id: "adventure", label: "Adventure", icon: Zap },
+	{ id: "cultural", label: "Cultural", icon: Shield },
+	{ id: "luxury", label: "Luxury", icon: Sparkles },
+	{ id: "family", label: "Family", icon: Users },
+	{ id: "romantic", label: "Romantic", icon: Heart },
+	{ id: "budget", label: "Budget", icon: Wallet },
+	{ id: "nature", label: "Nature", icon: Trees },
+	{ id: "nomad", label: "Nomad", icon: Laptop },
+];
 
-    function handleSubmit() {
-        onPlan({ destination, duration, style: selectedStyle });
-    }
+function handleSubmit() {
+	onPlan({ destination, duration, style: selectedStyle });
+}
 </script>
 
 <div

@@ -1,19 +1,37 @@
 <script lang="ts">
-	import { Wallet, Car, Utensils, Home, MoreHorizontal } from 'lucide-svelte';
-	import { fade } from 'svelte/transition';
+import { Wallet, Car, Utensils, Home, MoreHorizontal } from "lucide-svelte";
+import { fade } from "svelte/transition";
 
-	let { estimatedCosts } = $props();
+let { estimatedCosts } = $props();
 
-	const categories = [
-		{ id: 'accommodation', label: 'Accommodation', icon: Home, color: 'text-blue-400' },
-		{ id: 'food', label: 'Food & Dining', icon: Utensils, color: 'text-orange-400' },
-		{ id: 'transport', label: 'Transport', icon: Car, color: 'text-emerald-400' },
-		{ id: 'misc', label: 'Miscellaneous', icon: MoreHorizontal, color: 'text-purple-400' }
-	];
+const categories = [
+	{
+		id: "accommodation",
+		label: "Accommodation",
+		icon: Home,
+		color: "text-blue-400",
+	},
+	{
+		id: "food",
+		label: "Food & Dining",
+		icon: Utensils,
+		color: "text-orange-400",
+	},
+	{ id: "transport", label: "Transport", icon: Car, color: "text-emerald-400" },
+	{
+		id: "misc",
+		label: "Miscellaneous",
+		icon: MoreHorizontal,
+		color: "text-purple-400",
+	},
+];
 
-    let total = $derived(
-        Object.values(estimatedCosts).reduce((acc: number, val: any) => acc + (typeof val === 'number' ? val : 0), 0)
-    );
+let total = $derived(
+	Object.values(estimatedCosts).reduce(
+		(acc: number, val: any) => acc + (typeof val === "number" ? val : 0),
+		0,
+	),
+);
 </script>
 
 <div in:fade class="glass p-8 rounded-3xl border-primary/20">

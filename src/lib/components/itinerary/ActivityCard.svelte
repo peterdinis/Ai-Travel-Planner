@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Clock, MapPin } from 'lucide-svelte';
-	import { fade } from 'svelte/transition';
+import { Clock, MapPin } from "lucide-svelte";
+import { fade } from "svelte/transition";
 
-	let { activity } = $props();
+let { activity } = $props();
 </script>
 
 <div in:fade class="glass p-6 rounded-2xl border-white/5 hover:border-white/10 transition-colors">

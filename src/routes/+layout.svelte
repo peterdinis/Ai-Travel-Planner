@@ -1,20 +1,20 @@
 <script lang="ts">
-	import "./layout.css";
-	import { Compass, Palmtree, Map, User, Menu, X } from "lucide-svelte";
-	import favicon from "$lib/assets/favicon.svg";
-	import { page } from "$app/state";
-	import { fade } from "svelte/transition";
+import "./layout.css";
+import { Compass, Palmtree, Map, User, Menu, X } from "lucide-svelte";
+import favicon from "$lib/assets/favicon.svg";
+import { page } from "$app/state";
+import { fade } from "svelte/transition";
 
-	let { children } = $props();
-	let isMobileMenuOpen = $state(false);
+let { children } = $props();
+let isMobileMenuOpen = $state(false);
 
-	function toggleMobileMenu() {
-		isMobileMenuOpen = !isMobileMenuOpen;
-	}
+function toggleMobileMenu() {
+	isMobileMenuOpen = !isMobileMenuOpen;
+}
 
-	function closeMobileMenu() {
-		isMobileMenuOpen = false;
-	}
+function closeMobileMenu() {
+	isMobileMenuOpen = false;
+}
 </script>
 
 <svelte:head>
