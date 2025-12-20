@@ -185,7 +185,7 @@ $effect(() => {
 <div class="space-y-12">
 	<div class="text-center space-y-6 max-w-3xl mx-auto">
 		<h1
-			class="text-4xl md:text-5xl font-bold font-display bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+			class="text-4xl md:text-5xl font-bold font-display bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent"
 		>
 			Explore the World
 		</h1>
@@ -221,7 +221,7 @@ $effect(() => {
 							class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
 						/>
 						<div
-							class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
+							class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"
 						></div>
 						<div
 							class="absolute bottom-4 left-4 flex gap-2 flex-wrap"

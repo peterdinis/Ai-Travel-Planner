@@ -4,60 +4,16 @@ import PlanForm from "$lib/components/PlanForm.svelte";
 import FeatureGrid from "$lib/components/FeatureGrid.svelte";
 import LoadingOverlay from "$lib/components/LoadingOverlay.svelte";
 import ItineraryDisplay from "$lib/components/ItineraryDisplay.svelte";
-import { fade, fly } from "svelte/transition";
-
-import { onMount } from "svelte";
+import { fade } from "svelte/transition";
 import { page } from "$app/state";
+import type { Itinerary, FormData, ApiError } from "../interfaces/ItneraryI";
 
-interface Itinerary {
-	id: string;
-	destination: string;
-	duration: number;
-	style: string;
-	days: Array<{
-		day: number;
-		activities: Array<{
-			time: string;
-			title: string;
-			description: string;
-			category: string;
-		}>;
-	}>;
-	estimatedCosts: {
-		accommodation: number;
-		food: number;
-		transport: number;
-		misc: number;
-	};
-	summary?: string;
-	[key: string]: unknown;
-}
-
-interface FormData {
-	destination: string;
-	duration: number;
-	style: string;
-}
-
-interface ApiError {
-	error: string;
-}
 
 let destination = $state("");
 let isGenerating = $state(false);
 let itinerary = $state<Itinerary | null>(null);
 let error = $state("");
 let currentFormData = $state<FormData | null>(null);
-
-onMount(() => {
-	const destParam = page.url.searchParams.get("dest");
-	const durationParam = page.url.searchParams.get("duration");
-	const styleParam = page.url.searchParams.get("style");
-
-	if (destParam || durationParam || styleParam) {
-		// Pre-fill the form if needed
-	}
-});
 
 async function handlePlanTrip(formData: FormData) {
 	destination = formData.destination;
@@ -126,15 +82,14 @@ function resetTrip() {
 				/>
 			</Hero>
 
-			<!-- Background Elements -->
 			<div
 				class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10 pointer-events-none"
 			>
 				<div
-					class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 blur-[120px] rounded-full"
+					class="absolute top-0 right-0 w-125 h-125 bg-primary/20 blur-[120px] rounded-full"
 				></div>
 				<div
-					class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/10 blur-[120px] rounded-full"
+					class="absolute bottom-0 left-0 w-125 h-125 bg-secondary/10 blur-[120px] rounded-full"
 				></div>
 			</div>
 		</section>

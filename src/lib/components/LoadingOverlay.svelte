@@ -1,6 +1,6 @@
 <script lang="ts">
-import { Loader2, Sparkles, Plane, Globe, Camera, Map } from "lucide-svelte";
-import { fade, fly } from "svelte/transition";
+import { Sparkles, Plane, Globe, Camera, Map } from "lucide-svelte";
+import { fade} from "svelte/transition";
 
 let { destination } = $props();
 
@@ -77,7 +77,7 @@ const icons = [Plane, Globe, Camera, Map];
 
 		<div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
 			<div
-				class="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-500"
+				class="h-full bg-linear-to-r from-primary to-secondary transition-all duration-500"
 				style="width: {progress}%"
 			></div>
 		</div>

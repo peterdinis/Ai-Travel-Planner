@@ -6,7 +6,7 @@ interface EstimatedCosts {
 	food: number;
 	transport: number;
 	misc: number;
-	[key: string]: number; // Pre prípadné ďalšie kategórie
+	[key: string]: number;
 }
 
 let { estimatedCosts }: { estimatedCosts: EstimatedCosts } = $props();

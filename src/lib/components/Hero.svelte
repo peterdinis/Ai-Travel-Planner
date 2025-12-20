@@ -20,7 +20,7 @@ let { children } = $props();
     >
         Your Next Adventure, <br />
         <span
-            class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent"
+            class="bg-linear-to-r from-primary via-secondary to-accent bg-clip-text text-transparent"
             >Perfectly Planned.</span
         >
     </h1>

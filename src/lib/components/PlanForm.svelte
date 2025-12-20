@@ -52,7 +52,7 @@ function handleSubmit() {
 
 <div
     in:fly={{ y: 15, duration: 400, delay: 300 }}
-    class="glass p-5 md:p-8 rounded-[2rem] max-w-3xl mx-auto shadow-2xl"
+    class="glass p-5 md:p-8 rounded-4xl max-w-3xl mx-auto shadow-2xl"
 >
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div class="text-left">

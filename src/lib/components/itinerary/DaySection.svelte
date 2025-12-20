@@ -7,8 +7,7 @@ let { day, index } = $props();
 </script>
 
 <div in:fly={{ y: 20, delay: index * 100 }} class="relative pl-8 border-l border-white/10 pb-12 last:pb-0">
-    <!-- Day Marker -->
-    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary shadow-[0_0_10px_rgba(79,70,229,0.5)]"></div>
+    <div class="absolute -left-2.25 top-0 w-4 h-4 rounded-full bg-primary shadow-[0_0_10px_rgba(79,70,229,0.5)]"></div>
     
     <div class="mb-6">
         <h2 class="text-2xl font-bold text-white mb-2 font-display">Day {day.dayNumber}: {day.theme}</h2>

@@ -1,6 +1,6 @@
 <script lang="ts">
 import "./layout.css";
-import { Compass, Palmtree, Map, User, Menu, X } from "lucide-svelte";
+import { Compass, Palmtree, Menu, X } from "lucide-svelte";
 import favicon from "$lib/assets/favicon.svg";
 import { page } from "$app/state";
 import { fade } from "svelte/transition";
@@ -29,7 +29,7 @@ function closeMobileMenu() {
 		<div class="flex items-center gap-2">
 			<Compass class="text-primary w-6 h-6 md:w-8 md:h-8" />
 			<span
-				class="text-xl md:text-2xl font-bold font-display tracking-tight bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+				class="text-xl md:text-2xl font-bold font-display tracking-tight bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent"
 			>
 				GlobeTrotter AI
 			</span>

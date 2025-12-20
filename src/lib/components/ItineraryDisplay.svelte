@@ -37,7 +37,7 @@ let { itinerary, onBack } = $props();
 
 	<header class="mb-16" in:fly={{ y: 15, duration: 500 }}>
 		<h1
-			class="text-4xl md:text-5xl lg:text-7xl font-black font-display mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent leading-tight"
+			class="text-4xl md:text-5xl lg:text-7xl font-black font-display mb-6 bg-linear-to-r from-primary via-secondary to-accent bg-clip-text text-transparent leading-tight"
 		>
 			{itinerary.tripName}
 		</h1>
