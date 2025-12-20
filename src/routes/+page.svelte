@@ -4,7 +4,6 @@
 	import FeatureGrid from "$lib/components/FeatureGrid.svelte";
 	import LoadingOverlay from "$lib/components/LoadingOverlay.svelte";
 	import ItineraryDisplay from "$lib/components/ItineraryDisplay.svelte";
-	import { tripsStore } from "$lib/stores/trips.svelte";
 	import { fade, fly } from "svelte/transition";
 
 	import { onMount } from "svelte";
@@ -55,14 +54,6 @@
 			if (data.error) throw new Error(data.error);
 
 			itinerary = data;
-
-			// Auto-save the trip
-			tripsStore.saveTrip({
-				destination: formData.destination,
-				duration: formData.duration,
-				style: formData.style,
-				itinerary: data,
-			});
 		} catch (e: any) {
 			error = e.message || "Something went wrong";
 		} finally {

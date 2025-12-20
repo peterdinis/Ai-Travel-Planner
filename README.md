@@ -1,38 +1,75 @@
-# sv
+# AI Travel Planner 🌍
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A premium, AI-powered travel planning application built with SvelteKit and OpenAI. Generate personalized, detailed itineraries for any destination in seconds.
 
-## Creating a project
+![AI Travel Planner](https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo-horizontal.svg)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## ✨ Features
 
-```sh
-# create a new project in the current directory
-npx sv create
+- **Intelligent Planning**: Powered by OpenAI's GPT-4o-mini for highly personalized itineraries.
+- **Dynamic UI**: Modern, glassmorphism-inspired design with fluid animations.
+- **Detailed Itineraries**: Includes daily themes, activity descriptions, meal suggestions, and cost estimates.
+- **Practical Data**: Provides weather tips, packing lists, and safety advice for every trip.
+- **Responsive Design**: Optimized for both desktop and mobile experiences.
 
-# create a new project in my-app
-npx sv create my-app
-```
+## 🚀 Tech Stack
 
-## Developing
+- **Framework**: [SvelteKit](https://kit.svelte.dev/) (Svelte 5)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **AI Engine**: [OpenAI API](https://openai.com/)
+- **Icons**: [Lucide Svelte](https://lucide.dev/)
+- **Date Handling**: [date-fns](https://date-fns.org/)
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## 🛠️ Getting Started
 
-```sh
+### Prerequisites
+
+- Node.js (v20 or later)
+- An OpenAI API Key
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-url>
+   cd ai-travel-planner
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env` file in the root directory:
+   ```env
+   OPENAI_API_KEY=your_api_key_here
+   ```
+
+### Development
+
+Start the development server:
+
+```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+The app will be available at `http://localhost:5173`.
 
-To create a production version of your app:
+## 🏗️ Building for Production
 
-```sh
+To create a production-ready build:
+
+```bash
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+Preview the build:
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```bash
+npm run preview
+```
+
+## 📄 License
+
+MIT
