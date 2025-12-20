@@ -1,6 +1,6 @@
 <script lang="ts">
 import { Sparkles, Plane, Globe, Camera, Map } from "lucide-svelte";
-import { fade} from "svelte/transition";
+import { fade } from "svelte/transition";
 
 let { destination } = $props();
 

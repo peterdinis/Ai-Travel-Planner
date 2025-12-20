@@ -8,7 +8,6 @@ import { fade } from "svelte/transition";
 import { page } from "$app/state";
 import type { Itinerary, FormData, ApiError } from "../interfaces/ItneraryI";
 
-
 let destination = $state("");
 let isGenerating = $state(false);
 let itinerary = $state<Itinerary | null>(null);
@@ -35,8 +34,8 @@ async function handlePlanTrip(formData: FormData) {
 		});
 
 		const data: Itinerary | ApiError = await response.json();
-		
-		if ('error' in data) {
+
+		if ("error" in data) {
 			throw new Error((data as ApiError).error);
 		}
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 import { CheckSquare, Square, PackageCheck } from "lucide-svelte";
-import { fade} from "svelte/transition";
+import { fade } from "svelte/transition";
 
 let { packingList } = $props();
 let checkedItems = $state(new Set());
