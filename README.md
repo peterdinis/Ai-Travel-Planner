@@ -2,8 +2,6 @@
 
 A premium, AI-powered travel planning application built with SvelteKit and OpenAI. Generate personalized, detailed itineraries for any destination in seconds.
 
-![AI Travel Planner](https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo-horizontal.svg)
-
 ## ✨ Features
 
 - **Intelligent Planning**: Powered by OpenAI's GPT-4o-mini for highly personalized itineraries.
