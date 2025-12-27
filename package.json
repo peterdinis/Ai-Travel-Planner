@@ -26,7 +26,6 @@
 		"vite": "^7.3.0"
 	},
 	"dependencies": {
-		"@google/generative-ai": "^0.24.1",
 		"date-fns": "^4.1.0",
 		"lucide-svelte": "^0.562.0",
 		"openai": "^6.15.0"
