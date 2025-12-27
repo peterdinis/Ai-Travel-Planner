@@ -4,6 +4,7 @@ import { Compass, Palmtree, Menu, X } from "lucide-svelte";
 import favicon from "$lib/assets/favicon.svg";
 import { page } from "$app/state";
 import { fade } from "svelte/transition";
+    import ScrollToTop from "$lib/components/ScrollToTop.svelte";
 
 let { children } = $props();
 let isMobileMenuOpen = $state(false);
@@ -31,7 +32,7 @@ function closeMobileMenu() {
 			<span
 				class="text-xl md:text-2xl font-bold font-display tracking-tight bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent"
 			>
-				GlobeTrotter AI
+				Travell Planner 
 			</span>
 		</div>
 
@@ -127,6 +128,7 @@ function closeMobileMenu() {
 				out:fade={{ duration: 150 }}
 			>
 				{@render children()}
+				<ScrollToTop />
 			</div>
 		{/key}
 	</main>
@@ -136,8 +138,8 @@ function closeMobileMenu() {
 	>
 		<div class="flex items-center justify-center gap-2 mb-4">
 			<Palmtree class="w-5 h-5 text-secondary" />
-			<span class="font-bold text-slate-200">GlobeTrotter AI</span>
+			<span class="font-bold text-slate-200">Travell Planner</span>
 		</div>
-		<p>&copy; 2025 GlobeTrotter AI. Built for modern travelers.</p>
+		<p>&copy; 2025 Travell Planner. Built for modern travelers.</p>
 	</footer>
 </div>
