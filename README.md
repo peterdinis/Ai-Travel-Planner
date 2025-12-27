@@ -16,7 +16,6 @@ A premium, AI-powered travel planning application built with SvelteKit and OpenA
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
 - **AI Engine**: [OpenAI API](https://openai.com/)
 - **Icons**: [Lucide Svelte](https://lucide.dev/)
-- **Date Handling**: [date-fns](https://date-fns.org/)
 
 ## 🛠️ Getting Started
 
