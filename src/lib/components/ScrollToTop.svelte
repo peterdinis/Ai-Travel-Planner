@@ -7,7 +7,6 @@
     export let threshold: number = 300; // When to show button (px from top)
     export let showAfter: number = 500; // Delay before showing (ms)
     export let smooth: boolean = true; // Smooth scrolling
-    export let duration: number = 800; // Scroll duration (ms)
     export let position: "bottom-right" | "bottom-left" | "bottom-center" =
         "bottom-right";
     export let buttonSize: "sm" | "md" | "lg" = "md";
@@ -111,7 +110,7 @@
     <!-- Main Button -->
     <button
         class="group relative flex items-center justify-center rounded-full shadow-lg
-           bg-gradient-to-br from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800
+           bg-linear-to-br from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800
            text-white transition-all duration-300 hover:shadow-xl hover:scale-105
            active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
            {sizes[buttonSize]} {customClass}"

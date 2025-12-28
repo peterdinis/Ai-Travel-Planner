@@ -23,14 +23,14 @@ let {
 	initialStyle = "relaxing",
 } = $props();
 
-let destination = $state(initialDestination);
-let duration = $state(initialDuration);
-let selectedStyle = $state(initialStyle);
+let destination = $state("");
+let duration = $state(7);
+let selectedStyle = $state("relaxing");
 
 $effect(() => {
-	if (initialDestination) destination = initialDestination;
-	if (initialDuration) duration = initialDuration;
-	if (initialStyle) selectedStyle = initialStyle;
+    destination = initialDestination;
+    duration = initialDuration;
+    selectedStyle = initialStyle;
 });
 
 const tripStyles = [
