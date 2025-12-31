@@ -28,9 +28,9 @@ let duration = $state(7);
 let selectedStyle = $state("relaxing");
 
 $effect(() => {
-    destination = initialDestination;
-    duration = initialDuration;
-    selectedStyle = initialStyle;
+	destination = initialDestination;
+	duration = initialDuration;
+	selectedStyle = initialStyle;
 });
 
 const tripStyles = [

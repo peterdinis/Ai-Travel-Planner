@@ -4,7 +4,7 @@ import { Compass, Palmtree, Menu, X } from "lucide-svelte";
 import favicon from "$lib/assets/favicon.svg";
 import { page } from "$app/state";
 import { fade } from "svelte/transition";
-    import ScrollToTop from "$lib/components/ScrollToTop.svelte";
+import ScrollToTop from "$lib/components/ScrollToTop.svelte";
 
 let { children } = $props();
 let isMobileMenuOpen = $state(false);

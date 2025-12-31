@@ -1,102 +1,101 @@
 <script lang="ts">
-    import { onMount, onDestroy } from "svelte";
-    import { tweened } from "svelte/motion";
-    import { cubicOut } from "svelte/easing";
+import { onMount, onDestroy } from "svelte";
+import { tweened } from "svelte/motion";
+import { cubicOut } from "svelte/easing";
 
-    // Props
-    export let threshold: number = 300; // When to show button (px from top)
-    export let showAfter: number = 500; // Delay before showing (ms)
-    export let smooth: boolean = true; // Smooth scrolling
-    export let position: "bottom-right" | "bottom-left" | "bottom-center" =
-        "bottom-right";
-    export let buttonSize: "sm" | "md" | "lg" = "md";
-    export let customClass: string = "";
-    export let icon: "arrow" | "chevron" | "caret" | "custom" = "arrow";
+// Props
+export let threshold: number = 300; // When to show button (px from top)
+export let showAfter: number = 500; // Delay before showing (ms)
+export let smooth: boolean = true; // Smooth scrolling
+export let position: "bottom-right" | "bottom-left" | "bottom-center" =
+	"bottom-right";
+export let buttonSize: "sm" | "md" | "lg" = "md";
+export let customClass: string = "";
+export let icon: "arrow" | "chevron" | "caret" | "custom" = "arrow";
 
-    // Reactive state
-    let isVisible: boolean = false;
-    let showTimeout: number| null = null;
-    let progress = tweened(0, { duration: 200, easing: cubicOut });
+// Reactive state
+let isVisible: boolean = false;
+let showTimeout: number | null = null;
+let progress = tweened(0, { duration: 200, easing: cubicOut });
 
-    // Sizes configuration
-    const sizes = {
-        sm: "w-10 h-10",
-        md: "w-12 h-12",
-        lg: "w-14 h-14",
-    };
+// Sizes configuration
+const sizes = {
+	sm: "w-10 h-10",
+	md: "w-12 h-12",
+	lg: "w-14 h-14",
+};
 
-    // Position classes
-    const positions = {
-        "bottom-right": "bottom-6 right-6",
-        "bottom-left": "bottom-6 left-6",
-        "bottom-center": "bottom-6 left-1/2 transform -translate-x-1/2",
-    };
+// Position classes
+const positions = {
+	"bottom-right": "bottom-6 right-6",
+	"bottom-left": "bottom-6 left-6",
+	"bottom-center": "bottom-6 left-1/2 transform -translate-x-1/2",
+};
 
-    // Icons
-    const icons = {
-        arrow: "M5 10l7-7m0 0l7 7m-7-7v18",
-        chevron: "M5 15l7-7 7 7",
-        caret: "M5 11l7-7 7 7",
-    };
+// Icons
+const icons = {
+	arrow: "M5 10l7-7m0 0l7 7m-7-7v18",
+	chevron: "M5 15l7-7 7 7",
+	caret: "M5 11l7-7 7 7",
+};
 
-    // Handle scroll
-    const handleScroll = () => {
-        const scrolled = window.scrollY;
-        isVisible = scrolled > threshold;
+// Handle scroll
+const handleScroll = () => {
+	const scrolled = window.scrollY;
+	isVisible = scrolled > threshold;
 
-        // Calculate scroll progress (0 to 1)
-        const docHeight =
-            document.documentElement.scrollHeight - window.innerHeight;
-        if (docHeight > 0) {
-            progress.set(Math.min(scrolled / docHeight, 1));
-        }
-    };
+	// Calculate scroll progress (0 to 1)
+	const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+	if (docHeight > 0) {
+		progress.set(Math.min(scrolled / docHeight, 1));
+	}
+};
 
-    // Scroll to top function
-    const scrollToTop = () => {
-        if (smooth) {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-            });
-        } else {
-            window.scrollTo(0, 0);
-        }
+// Scroll to top function
+const scrollToTop = () => {
+	if (smooth) {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
+	} else {
+		window.scrollTo(0, 0);
+	}
 
-        // Optional: Dispatch custom event
-        dispatch("scrolled");
-    };
+	// Optional: Dispatch custom event
+	dispatch("scrolled");
+};
 
-    // Keyboard support
-    const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            scrollToTop();
-        }
-    };
+// Keyboard support
+const handleKeyDown = (e: KeyboardEvent) => {
+	if (e.key === "Enter" || e.key === " ") {
+		e.preventDefault();
+		scrollToTop();
+	}
+};
 
-    // Dispatch events
-    import { createEventDispatcher } from "svelte";
-    const dispatch = createEventDispatcher();
+// Dispatch events
+import { createEventDispatcher } from "svelte";
+const dispatch = createEventDispatcher();
 
-    // Lifecycle
-    onMount(() => {
-        window.addEventListener("scroll", handleScroll, { passive: true });
+// Lifecycle
+onMount(() => {
+	window.addEventListener("scroll", handleScroll, { passive: true });
 
-        // Delay initial check
-        showTimeout = setTimeout(() => {
-            handleScroll();
-        }, showAfter);
+	// Delay initial check
+	showTimeout = setTimeout(() => {
+		handleScroll();
+	}, showAfter);
 
-        return () => {
-            if (showTimeout) clearTimeout(showTimeout);
-            window.removeEventListener("scroll", handleScroll);
-        };
-    });
+	return () => {
+		if (showTimeout) clearTimeout(showTimeout);
+		window.removeEventListener("scroll", handleScroll);
+	};
+});
 
-    onDestroy(() => {
-        if (showTimeout) clearTimeout(showTimeout);
-    });
+onDestroy(() => {
+	if (showTimeout) clearTimeout(showTimeout);
+});
 </script>
 
 <svelte:window on:scroll={handleScroll} />
