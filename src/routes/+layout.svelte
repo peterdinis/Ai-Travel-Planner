@@ -140,6 +140,6 @@ function closeMobileMenu() {
 			<Palmtree class="w-5 h-5 text-secondary" />
 			<span class="font-bold text-slate-200">Travell Planner</span>
 		</div>
-		<p>&copy; 2025 Travell Planner. Built for modern travelers.</p>
+		<p>&copy; 2026 Travell Planner. Built for modern travelers.</p>
 	</footer>
 </div>
